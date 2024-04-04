@@ -66,13 +66,13 @@ public class TicTacToe10by10 {
                     moveCounter = 0;
                     textLabel.setText("Tic Tac Toe 10x10");
                     gameOver = false;
-                    System.out.println("Left Click");
+                    System.out.println("Left Click Game Reset");
                 }
                 else if(SwingUtilities.isRightMouseButton(e)) {
 
                             new App();
                             frame.dispose();
-                    System.out.println("Right Click");
+                    System.out.println("Right Click Return to Menu");
                 }
             }
         });
