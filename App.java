@@ -11,7 +11,7 @@ public class App {
     JPanel menuPanel = new JPanel();
     JButton firstGame = new JButton("Tic Tac Toe 3x3");
     JButton secGame = new JButton("Tic Tac Toe 10x10");
-    JButton thirdGame = new JButton("Tic Tac Toe");
+    JButton thirdGame = new JButton("Tic Tac Toe 3x3 Simple AI");
 
     public App() {
         gameMenu();
@@ -35,12 +35,12 @@ public class App {
                 frame.dispose();
             }
         });
-        // thirdGame.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         new TicTacToeUlt();
-        //         frame.dispose();
-        //     }
-        // });
+        thirdGame.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new TicTacToe3by3AI();
+                frame.dispose();
+            }
+        });
     }
 
     public void gameMenu() {
@@ -58,13 +58,16 @@ public class App {
         textLabel.setText("Tic Tac Toe");
         textLabel.setOpaque(true);
 
-        firstGame.setBackground(Color.darkGray);
+        firstGame.setBackground(Color.gray);
+        firstGame.setFont(new Font("Arial", Font.BOLD, 50));
         firstGame.setFocusable(false);
         firstGame.setForeground(Color.white);
         secGame.setBackground(Color.darkGray);
+        secGame.setFont(new Font("Arial", Font.BOLD, 50));
         secGame.setFocusable(false);
         secGame .setForeground(Color.white);
-        thirdGame.setBackground(Color.darkGray);
+        thirdGame.setBackground(Color.gray);
+        thirdGame.setFont(new Font("Arial", Font.BOLD, 25));
         thirdGame.setFocusable(false);
         thirdGame.setForeground(Color.white);
 

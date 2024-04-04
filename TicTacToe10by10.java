@@ -5,7 +5,7 @@ import javax.swing.*;
 public class TicTacToe10by10 {
     int boardWidth = 600;
     int boardHeight = 650;
-    int size = 10;
+    int size = 5;
     int moveCounter = 0;
 
     JFrame frame = new JFrame("Tic Tac Toe 10x10");
@@ -56,15 +56,16 @@ public class TicTacToe10by10 {
         resetButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    for (int row = 0; row < 3; row++) {
-                        for (int col = 0; col < 3; col++) {
+                    for (int row = 0; row < size; row++) {
+                        for (int col = 0; col < size; col++) {
                             board[row][col].setText("");
                             board[row][col].setBackground(Color.darkGray);
                         }
                     }
                     currentPlayer = playerX;
-                    textLabel.setText("Tic Tac Toe 3x3");
-                    gameOver = false;;
+                    moveCounter = 0;
+                    textLabel.setText("Tic Tac Toe 10x10");
+                    gameOver = false;
                     System.out.println("Left Click");
                 }
                 else if(SwingUtilities.isRightMouseButton(e)) {
@@ -91,17 +92,20 @@ public class TicTacToe10by10 {
                     public void actionPerformed(ActionEvent e) {
                         if (((JButton)e.getSource()).getText() == "" && !gameOver) {
                             if (currentPlayer == playerX) {
-                                ((JButton)e.getSource()).setForeground(Color.red);
-                                ((JButton)e.getSource()).setBackground(Color.lightGray);
+                                tile.setText(playerX);
+                                tile.setForeground(Color.red);
+                                tile.setBackground(Color.lightGray);
+                                textLabel.setText(playerO + "'s turn");
                             } else {
-                                ((JButton)e.getSource()).setForeground(Color.green);
-                                ((JButton)e.getSource()).setBackground(Color.lightGray);
+                                tile.setText(playerO);
+                                tile.setForeground(Color.green);
+                                tile.setBackground(Color.lightGray);
+                                textLabel.setText(playerX + "'s turn");
                             }
-                            ((JButton)e.getSource()).setText(currentPlayer);
-                            moveCounter++;
+                            
                             checkWinner();
+                            moveCounter++;
                             currentPlayer = currentPlayer == playerX ? playerO : playerX; 
-                            textLabel.setText(currentPlayer + "'s turn");
                             if (moveCounter == size * size && !gameOver) {
                                 textLabel.setText("It's a draw!");
                                 for (int row = 0; row < size; row++) {
@@ -129,7 +133,7 @@ public class TicTacToe10by10 {
                         gameOver = true;
                         textLabel.setText("Player " + symbol + " wins!");
                         for (int k = 0; k < 5; k++) {
-                            board[i][j + k].setBackground(Color.green);
+                            board[i][j + k].setBackground(new Color(153,255,204));
                         }
                         return;
                     };
@@ -138,7 +142,7 @@ public class TicTacToe10by10 {
                         gameOver = true;
                         textLabel.setText("Player " + symbol + " wins!");
                         for (int k = 0; k < 5; k++) {
-                            board[i + k][j].setBackground(Color.green);
+                            board[i + k][j].setBackground(new Color(153,255,204));
                         }
                         return;
                     };
@@ -147,7 +151,7 @@ public class TicTacToe10by10 {
                         gameOver = true;
                         textLabel.setText("Player " + symbol + " wins!");
                         for (int k = 0; k < 5; k++) {
-                            board[i + k][j + k].setBackground(Color.green);
+                            board[i + k][j + k].setBackground(new Color(153,255,204));
                         }
                         return;
                     };
@@ -156,7 +160,7 @@ public class TicTacToe10by10 {
                         gameOver = true;
                         textLabel.setText("Player " + symbol + " wins!");
                         for (int k = 0; k < 5; k++) {
-                            board[i + k][j - k].setBackground(Color.green);
+                            board[i + k][j - k].setBackground(new Color(153,255,204));
                         }
                         return;
                     };

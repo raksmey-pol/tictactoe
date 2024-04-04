@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class TicTacToe3by3 {
+public class TicTacToe3by3AI {
     int boardWidth = 600;
     int boardHeight = 650;
 
@@ -20,7 +20,7 @@ public class TicTacToe3by3 {
 
     boolean gameOver = false;
 
-    TicTacToe3by3() {
+    TicTacToe3by3AI() {
         frame.setVisible(true);
         frame.setSize(boardWidth, boardHeight);
         frame.setLocationRelativeTo(null);
@@ -93,33 +93,39 @@ public class TicTacToe3by3 {
                         }
                         JButton tile = (JButton) e.getSource();
                         if (tile.getText().equals("")) {
-                            if (currentPlayer == playerX) {
-                                tile.setText(playerX);
-                                tile.setForeground(Color.red);
-                                tile.setBackground(Color.lightGray);
-                            } else {
-                                tile.setText(playerO);
-                                tile.setForeground(Color.green);
-                                tile.setBackground(Color.lightGray);
-                            }
-                            
+                            tile.setText(playerX);
+                            tile.setForeground(Color.red);
+                            tile.setBackground(Color.lightGray);
                             checkWinner();
                             if (!gameOver) {
-                                currentPlayer = currentPlayer == playerX ? playerO : playerX; 
-                                // (currentPlayer == playerX) {
-                                //     currentPlayer = playerO;
-                                // } else {
-                                //     currentPlayer = playerX;
-                                // }
-                                textLabel.setText(currentPlayer + "'s turn");
-                            }  
-                        
+                                currentPlayer = playerO;
+                                textLabel.setText("Computer's turn");
+                                computerMove();
+                                checkWinner();
+                                if (!gameOver) {
+                                    currentPlayer = playerX;
+                                    textLabel.setText("Your turn");
+                                }
+                            }
                         }
                     }
                 });
             }
+
         }
 
+    }
+
+    void computerMove() {
+        // Simple random move for the computer
+        int row, col;
+        do {
+            row = (int) (Math.random() * 3);
+            col = (int) (Math.random() * 3);
+        } while (!board[row][col].getText().equals(""));
+        board[row][col].setText(playerO);
+        board[row][col].setForeground(Color.green);
+        board[row][col].setBackground(Color.lightGray);
     }
 
     void checkWinner() {
