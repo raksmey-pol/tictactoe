@@ -51,10 +51,11 @@ public class TicTacToe3by3 {
 
         frame.add(boardPanel);
 
-
+        // Reset/Menu Button
         resetButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
+                    // Reset the board
                     for (int row = 0; row < 3; row++) {
                         for (int col = 0; col < 3; col++) {
                             board[row][col].setText("");
@@ -67,7 +68,7 @@ public class TicTacToe3by3 {
                     System.out.println("Left Click");
                 }
                 else if(SwingUtilities.isRightMouseButton(e)) {
-
+                    // Go back to the main menu
                             new App();
                             frame.dispose();
                     System.out.println("Right Click");
@@ -75,6 +76,7 @@ public class TicTacToe3by3 {
             }
         });
 
+        // Create the board
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 JButton tile = new JButton();
@@ -86,11 +88,14 @@ public class TicTacToe3by3 {
                 tile.setFont(new Font("Arial", Font.BOLD, 50));
                 tile.setFocusable(false);
 
+                // Add action listener to the button
                 tile.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         if (gameOver) {
                             return;
                         }
+                        
+                        //Set the text of the button to the current player
                         JButton tile = (JButton) e.getSource();
                         if (tile.getText().equals("")) {
                             if (currentPlayer == playerX) {
@@ -105,12 +110,9 @@ public class TicTacToe3by3 {
                             
                             checkWinner();
                             if (!gameOver) {
-                                currentPlayer = currentPlayer == playerX ? playerO : playerX; 
-                                // (currentPlayer == playerX) {
-                                //     currentPlayer = playerO;
-                                // } else {
-                                //     currentPlayer = playerX;
-                                // }
+                                currentPlayer = currentPlayer == playerX ? playerO : playerX;
+                                //Tenary Operator
+                                // (currentPlayer == playerX) {currentPlayer = playerO;} else {currentPlayer = playerX;// }
                                 textLabel.setText(currentPlayer + "'s turn");
                             }  
                         

@@ -5,7 +5,7 @@ import javax.swing.*;
 public class TicTacToe10by10 {
     int boardWidth = 600;
     int boardHeight = 650;
-    int size = 5;
+    int size = 10;
     int moveCounter = 0;
 
     JFrame frame = new JFrame("Tic Tac Toe 10x10");
@@ -103,6 +103,7 @@ public class TicTacToe10by10 {
                                 textLabel.setText(playerX + "'s turn");
                             }
                             
+                            // Check for winner
                             checkWinner();
                             moveCounter++;
                             currentPlayer = currentPlayer == playerX ? playerO : playerX; 
@@ -169,7 +170,8 @@ public class TicTacToe10by10 {
         }
         return; // No winner yet
     }
-
+    // Check if there are 5 consecutive symbols in a row starting from (row, col) in the direction of (deltaRow, deltaCol)
+    // deltaRow and deltaCol i.e. (1,0) = vertical; (0,1) = horizontal; (1,1) = diagonal; (1,-1) = anti-diagonal
     private boolean checkSequence(String symbol, int row, int col, int deltaRow, int deltaCol) {
         for (int k = 1; k < 5; k++) {
             if (board[row + k * deltaRow][col + k * deltaCol].getText() != (symbol)) {
